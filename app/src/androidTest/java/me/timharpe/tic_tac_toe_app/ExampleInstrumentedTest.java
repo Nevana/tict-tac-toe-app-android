@@ -1,4 +1,4 @@
-package com.example.tic_tac_toe_app;
+package me.timharpe.tic_tac_toe_app;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.tic_tac_toe_app", appContext.getPackageName());
+        assertEquals("com.timharpe.tic_tac_toe_app", appContext.getPackageName());
     }
 }

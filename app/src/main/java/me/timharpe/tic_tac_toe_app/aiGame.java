@@ -1,4 +1,4 @@
-package com.example.tic_tac_toe_app;
+package me.timharpe.tic_tac_toe_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 

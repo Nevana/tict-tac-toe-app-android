@@ -1,17 +1,13 @@
-package com.example.tic_tac_toe_app;
+package me.timharpe.tic_tac_toe_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.media.Image;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 
 public class basicGame extends AppCompatActivity {
     boolean playerX;
@@ -51,22 +47,26 @@ public class basicGame extends AppCompatActivity {
                     image.setImageResource(R.drawable.x);
                     gameState[tappedField] = 0;
                     if(checkWinner() == "X"){
-                        displayPanel.setText("Player X won!");
-                    }else if(checkWinner() == "O"){
-                        displayPanel.setText("Player O won!");
+                        displayPanel.setText("Player X won");
+                    }else if(checkWinner() == "O") {
+                        displayPanel.setText("Player O won");
+                    }else if(checkWinner() == "2"){
+                        displayPanel.setText("No winner");
                     }else {
-                        displayPanel.setText("Player O has to choos!");
+                        displayPanel.setText("Player O");
                         playerX = false;
                     }
                 }else{
                     image.setImageResource(R.drawable.o);
                     gameState[tappedField] = 1;
                     if(checkWinner() == "X"){
-                        displayPanel.setText("Player X won!");
+                        displayPanel.setText("Player X won");
                     }else if(checkWinner() == "O"){
-                        displayPanel.setText("Player O won!");
+                        displayPanel.setText("Player O won");
+                    }else if(checkWinner() == "2"){
+                        displayPanel.setText("No winner");
                     }else {
-                        displayPanel.setText("Player X has to choos!");
+                        displayPanel.setText("Player X");
                         playerX = true;
                     }
                 }
@@ -74,32 +74,34 @@ public class basicGame extends AppCompatActivity {
         }
     }
     public String checkWinner(){
+        //Check if nobody won
+        int counter = 0;
+        for (int val: gameState){
+            if(val != 2){
+                counter++;
+            }
+        }
+        if(counter == 9) {
+            activeGame = false;
+            return "2";
+        }
+        //Check if someone won
         for (int[] value: matrix){
             if (gameState[value[0]] == gameState[value[1]] && gameState[value[1]] == gameState[value[2]]) {
-                if(gameState[value[0]] != 2 && gameState[value[1]] != 2 && gameState[value[2]] != 2){
+                if (gameState[value[0]] != 2 && gameState[value[1]] != 2 && gameState[value[2]] != 2) {
                     activeGame = false;
-                    if(playerX) {
-                        System.out.println("X won");
+                    if (playerX) {
                         return "X";
-                    }else {
-                        System.out.println("0 won");
+                    } else {
                         return "O";
                     }
                 }
             }
         }
-        return "2";
+        return "3";
     }
+    //Clear the images an the states
     public void resetGame(View v){
-        /*
-        ImageView[] images = new ImageView[9];
-        for (int i = 0; i<9; i++){
-            int id = getResources().getIdentifier("imageView" +i, "id", getPackageName());
-            images[i] = (ImageView) findViewById(id);
-            System.out.println(images[i]);
-            //images[i].setImageResource(0);
-        }
-        */
         ImageView image1 = findViewById(R.id.imageView1);
         ImageView image2 = findViewById(R.id.imageView2);
         ImageView image3 = findViewById(R.id.imageView3);
@@ -119,10 +121,11 @@ public class basicGame extends AppCompatActivity {
         image7.setImageResource(0);
         image8.setImageResource(0);
         image9.setImageResource(0);
-
+        //Reset the gamestate
         for(int i = 0; i<9; i++){
             gameState[i] = 2;
         }
+        //Set the start player by random
         if(randomBoolean()){
             playerX = true;
             displayPanel.setText("Player X starts!");

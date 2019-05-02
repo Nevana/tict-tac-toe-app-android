@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.tic_tac_toe_app"
+        applicationId "me.timharpe.tic_tac_toe_app"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
